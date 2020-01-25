@@ -92,7 +92,7 @@ function openDataChannel() {
     ordered: true,
     reliable: true,
     negotiated: true,
-    id: "myChannel"
+    id: 17
   };
   dataChannel = yourConnection.createDataChannel("myLabel", dataChannelOptions);
 
