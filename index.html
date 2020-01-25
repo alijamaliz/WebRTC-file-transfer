@@ -11,7 +11,31 @@
     </head>
     <body>
         <div class="container">
-            <div class="card" id="connect-box">
+            <div class="card" id="login-box">
+                <div class="title">
+                    انتخاب نام
+                </div>
+                <div class="content">
+                    <div>لطفاً نام مورد نظر خود را وارد کنید:</strong></div>
+                    <div class="segment">
+                      <input
+                          type="text"
+                          id="myCode"
+                          placeholder="نام"
+                      />
+                    </div>
+                    <div class="segment">
+                      <button
+                          class="green"
+                          id="btn-connect"
+                          onclick="login();"
+                      >
+                          تایید
+                      </button>
+                    </div>
+                </div>
+            </div>
+            <div class="card hidden" id="connect-box">
                 <div class="title">
                     اتصال به کاربر دیگر
                 </div>

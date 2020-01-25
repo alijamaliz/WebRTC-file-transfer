@@ -8,8 +8,6 @@ var connection = new WebSocket('ws://localhost:8888');
 
 connection.onopen = function () {
   console.log("Connected");
-  // get a code for the user after connecting to the server
-  send({ type: "login" });
 };
 
 // Handle all messages through this callback
@@ -43,6 +41,16 @@ connection.onerror = function (err) {
   console.log("Got error", err);
 };
 
+function login() {
+    code = $('#myCode').val();
+    if (code !== '') {
+        // get a code for the user after connecting to the server
+        send({ type: 'login', name: code });
+    } else {
+        alert ("نام وارد شده نامعتبر است.");
+    }
+}
+
 // Alias for sending messages in JSON format
 function send(message) {
   if (connectedUser) {
@@ -53,9 +61,16 @@ function send(message) {
 };
 
 function onLogin(data) {
-    name = data.code;
-    $("#yourCode").text(name); // show the code to the user
-    startConnection();
+    if (data.success) {
+        name = data.code;
+        $("#yourCode").text(name); // show the code to the user
+        $('#login-box').addClass('hidden');
+        $('#connect-box').removeClass('hidden');
+        startConnection();
+    } else {
+        $('#myCode').val("");
+        alert("نام وارد شده تکراری است.");
+    }
 };
 
 var yourConnection, connectedUser, dataChannel, currentFile, currentFileSize, currentFileMeta;

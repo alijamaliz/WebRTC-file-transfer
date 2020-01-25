@@ -15,18 +15,24 @@ wss.on('connection', function (connection) {
 
     switch (data.type) {
       case "login":
-        var code = generateCode();
-        while(users[code])
-          code = generateCode();
-        data.name = code;
-        console.log("User logged in as", data.name);
-        users[data.name] = connection;
-        connection.name = data.name;
-        sendTo(connection, {
-          type: "login",
-          code: data.name,
-          success: true
-        });
+        var code = data.name;
+        if(users[code])
+          sendTo(connection, {
+              type: 'login',
+              code: data.name,
+              success: false
+          });
+        else {
+          data.name = code;
+          console.log("User logged in as", data.name);
+          users[data.name] = connection;
+          connection.name = data.name;
+          sendTo(connection, {
+            type: "login",
+            code: data.name,
+            success: true
+          });
+        }
         break;
       case "offer":
         console.log("Sending offer to", data.name);
