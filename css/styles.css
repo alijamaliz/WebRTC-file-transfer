@@ -122,11 +122,64 @@ button {
     cursor: pointer;
 }
 
+button:disabled {
+	color: #ccc;
+}
+
 button.green {
     background-color: green;
     color: white;
 }
 
+button.green:disabled {
+    background-color: #ccc;
+    color: white;
+}
+
+button.purple {
+    background-color: #8e44ad;
+    color: white;
+}
+
 .hidden {
     display: none;
+}
+
+#files-box, #files-list-container {
+	margin-top: 16px;
+}
+
+#files-list {
+	flex: 1;
+}
+
+#files-box label {
+	padding: 8px;
+	flex: 1;
+    font-family: IRANSans;
+    font-size: 12pt;
+	font-weight: 900;
+	background-color: green;
+	color: white;
+	border-radius: 5px;
+	cursor: pointer;
+	text-align: center;
+}
+
+.progress-bar {
+	flex: 1;
+	height: 30px;
+	background-color: #eee;
+	border-radius: 5px;
+	overflow: hidden;
+}
+
+.progress {
+	transition: 0.3s;
+	height: 100%;
+	background-color: #8e44ad;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
 }

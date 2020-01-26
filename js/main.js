@@ -30,7 +30,7 @@ function startSending() {
       $(".btn-remove-file-" + lastSentFileIndex).removeClass("btn-danger").addClass("btn-warning")
                 .attr("onclick", "")
                 .attr("disabled", "disabled")
-                .text("sending");
+                .text("درحال دریافت...");
       lastSentFileIndex++;
     //}
   }
@@ -74,9 +74,8 @@ function handleFileSelection(e) {
 }
 
 function addFile(file) {
-  
-
   $(".btn-start-send").removeClass("hidden");
+  $("input[type=file]").addClass("hidden");
 
   files.push(file)
 
@@ -87,16 +86,15 @@ function addFile(file) {
         "<h3 class=\"panel-title dont-break-out\">" + file.name + "</h3>" +
       "</div>" +
        "<div class=\"panel-body\">" +
-          "<p> type: <strong>" + file.type +
-          "</strong><br>size: <strong>" + sizeOf(file.size) +
+          "<p> نوع: <strong>" + file.type +
+          "</strong><br>حجم: <strong>" + localizeNumbers(sizeOf(file.size)) +
           "</strong></p>" +
-          "<div class=\"progress\">" +
-            "<div class=\"progress-bar progress-bar-striped\" role=\"progressbar\"" +
-            " aria-valuenow=\"0\" aria-valuemin=\"0\" aria-valuemax=\"100\"" +
-            " style=\"width: 0%\"><span class=\"sr-only\">0% Complete</span></div>"+
+          "<div class=\"progress-bar\">" +
+            "<div class=\"progress\"" +
+            " style=\"width: 0%\"><span></span></div>"+
           "</div>" +
-          "<button onclick=\"removeFile(" + (files.length -1) + ");\" class=\"btn btn-sm btn-danger btn-remove-file-" + (files.length-1) + "\"><span class=\"glyphicon glyphicon-remove\"" +
-          "aria-hidden=\"true\"></span> remove</button>" +
+          "<button onclick=\"removeFile(" + (files.length -1) + ");\" class=\"btn-remove-file-" + (files.length-1) + "\"><span class=\"glyphicon glyphicon-remove\"" +
+          "aria-hidden=\"true\"></span>حذف</button>" +
         "</div>" +
     "</div>" +
     "</div>"
@@ -117,4 +115,14 @@ sizeOf = function (bytes) {
 removeFile = function (index) {
   files.splice(index,1);
   $("#file-" + index).remove();
+}
+
+function localizeNumbers(number) {
+  number = String(number)
+  dic = { '0': '۰', '1': '۱', '2': '۲','3': '۳','4': '۴','5': '۵','6': '۶','7': '۷','8': '۸','9': '۹'};
+  res = "";
+  for (digit of number)
+    if (dic[digit]) res += dic[digit];
+    else res += digit;
+  return res;
 }

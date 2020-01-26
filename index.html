@@ -27,7 +27,6 @@
                     <div class="segment">
                       <button
                           class="green"
-                          id="btn-connect"
                           onclick="login();"
                       >
                           تایید
@@ -73,29 +72,37 @@
                     </div>
                 </div>
             </div>
-            <div id="files-box" class="hidden">
-                <div class="file-selector">
-                    <legend>Files to send</legend>
-                    <div id="drag-area">
-                        <input
-                            type="file"
-                            id="selectedFiles"
-                            name="selectedFiles[]"
-                            multiple="multiple"
-                        />
-                        or drop them here
-                    </div>
+            <div id="files-box" class="card hidden">
+                <div class="title">
+                    ارسال پرونده
                 </div>
-                <div class="container selected-files">
-                    <button
-                        class="btn btn-block btn-lg btn-primary btn-start-send hidden"
-                        onclick="startSending();"
-                    >
-                        Start sending
-                    </button>
-                    <div id="files-list" class="row"></div>
+                <div class="content">
+                  <div class="segment">
+                      <input
+                          type="file"
+                          id="selectedFiles"
+                          name="selectedFiles[]"
+                          multiple="multiple"
+                          class="hidden"
+                      />
+                      <label for="selectedFiles">انتخاب پرونده</label>
+                  </div>
+                  <div class="segment">
+                      <button
+                          class="hidden btn-start-send purple"
+                          onclick="startSending();"
+                      >
+                          شروع ارسال
+                      </button>
+                  </div>
                 </div>
-            </div>
+              </div>
+              <div id="files-list-container" class="card hidden">
+                <div class="title">
+                    پرونده‌ها
+                </div>
+                <div id="files-list" class="content"></div>
+              </div>
         </div>
 
         <script src="js/jquery-3.1.0.min.js"></script>

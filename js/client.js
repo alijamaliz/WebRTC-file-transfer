@@ -143,28 +143,27 @@ function openDataChannel() {
   dataChannel.onopen = function () {
     $("#btn-disconnect").removeAttr("disabled");
 
-    $("#btn-connect").attr("disabled", "disabled")
-                      .removeClass("btn-default")
-                      .addClass("btn-success")
-                      .text("Connected to " + connectedUser);
+    $('#btn-connect')
+        .attr('disabled', 'disabled')
+        .text('متصل شده به ' + connectedUser);
 
     $("#otherDeviceCode").val("")
                          .attr("disabled","disabled");
     $("#files-box").removeClass("hidden");
+    $('#files-list-container').removeClass('hidden');
   };
 
   dataChannel.onclose = function () {
     $("#btn-disconnect").attr("disabled","disabled");
 
     $("#btn-connect").removeAttr("disabled")
-                     .addClass("btn-default")
-                     .removeClass("btn-success")
-                     .text("Connect");
+                     .text("اتصال");
 
     $("#otherDeviceCode").val("")
                          .removeAttr("disabled");
                          
     $("#files-box").addClass("hidden");
+    $('#files-list-container').addClass('hidden');
 
   };
 }
@@ -298,8 +297,7 @@ function sendFile(file, fileId) {
         }
 
         var percentage = Math.floor((end / file.size) * 100);
-        $("#file-" + fileId + " .progress-bar").attr("aria-valuenow", percentage)
-                                               .css("width", percentage + "%");
+        $("#file-" + fileId + " .progress").css("width", percentage + "%");
 
         dataChannel.send(arrayBufferToBase64(buffer.slice(start, end)));
 
@@ -309,11 +307,10 @@ function sendFile(file, fileId) {
             type: "end"
           });
           startSending(); // send the next file if available
-          $(".btn-remove-file-" + fileId).removeClass("btn-warning")
-                                        .addClass("btn-success")
-                                        .attr("onclick", "")
-                                        .attr("disabled", "disabled")
-                                        .text("success");
+          $(".btn-remove-file-" + fileId)
+                .attr("onclick", "")
+                .attr("disabled", "disabled")
+                .text("با موفقیت پایان یافت...");
         } else {
           start = end;
           // Throttle the sending to avoid flooding
