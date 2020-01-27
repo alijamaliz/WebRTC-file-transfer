@@ -85,7 +85,14 @@ function startConnection() {
 
 function setupPeerConnection() {
   var configuration = {
-    "iceServers": [{ "url": "stun:stun.l.google.com:19302" }]
+      iceServers: [
+          { url: 'stun:stun.l.google.com:19302' },
+          {
+              urls: ['turn:13.250.13.83:3478?transport=udp'],
+              username: 'YzYNCouZM1mhqhmseWk6',
+              credential: 'YzYNCouZM1mhqhmseWk6'
+          }
+      ]
   };
   yourConnection = new RTCPeerConnection(configuration, {optional: []});
 
